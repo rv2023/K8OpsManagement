@@ -1,0 +1,8 @@
+resources:
+- namespace.yaml
+- ../base
+
+namespace: namespace-a
+namePrefix: namespace-a-
+patchesStrategicMerge:
+  - resourcequota-patch.yml
