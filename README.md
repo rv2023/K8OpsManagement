@@ -1,0 +1,2 @@
+# NameSpaceResourceQuotas
+NameSpaceResourceQuotas
