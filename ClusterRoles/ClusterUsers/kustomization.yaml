@@ -1,2 +1,3 @@
 resources:
-- jane-cluster-role.yml
+- admin-group-cluster-role.yml
+- karthik-cluster-role.yml
