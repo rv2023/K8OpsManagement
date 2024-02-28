@@ -1,4 +1,3 @@
-root@Karthik:/home/kramak01/kustomize/NameSpaceResourceQuotas# cat kustomization.yaml
 resources:
 - namespace-a
 - namespace-b
