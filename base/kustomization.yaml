@@ -1,3 +1,2 @@
-root@Karthik:/home/kramak01/kustomize/NameSpaceResourceQuotas# cat base/kustomization.yaml
 resources:
   - resourcequota.yml
