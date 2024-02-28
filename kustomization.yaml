@@ -1,3 +1,4 @@
 resources:
 - namespace-a
 - namespace-b
+- default-cluster-role.yml
