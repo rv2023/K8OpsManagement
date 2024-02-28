@@ -4,4 +4,3 @@ resources:
 - high-latency-storage-class.yml
 - default-storage-class.yml
 - default-namespace-role.yml
-- default-cluster-role.yml
