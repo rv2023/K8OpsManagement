@@ -2,3 +2,4 @@ resources:
 - namespace.yaml
 - ../base
 namespace: namespace-b
+namePrefix: namespace-b-
