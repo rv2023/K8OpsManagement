@@ -5,7 +5,7 @@ metadata:
   name: read-secrets-global
 subjects:
 - kind: Group
-  name: jane # Name is case sensitive
+  name: AdminsGroup # Name is case sensitive
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
