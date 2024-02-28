@@ -1,2 +1,3 @@
 resources:
 - resourcequota.yml
+- default-limit-range.yml
