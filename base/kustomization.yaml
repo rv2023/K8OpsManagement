@@ -1,2 +1,2 @@
 resources:
-  - resourcequota.yml
+- resourcequota.yml
