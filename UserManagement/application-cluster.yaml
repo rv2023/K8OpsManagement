@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: usermanagement
+  name: usermanagement-cluster
   namespace: argocd
 spec:
   generators:
   - git:
        repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
        revision: HEAD
-       files:
-       - path: UserManagement/namespaces/*/values.yaml
+       directories:
+       - path: UserManagement/namespaces/*
   template:
     metadata:
-      name: '{{ path[2] }}-users'
+      name: '{{ path[2] }}-cluster-users'
       annotations:
-        argocd.argoproj.io/manifest-generate-paths: ".;.."
+        argocd.argoproj.io/manifest-generate-paths: /UserManagement/configurations/templates/cluster-auditor-role-binding.yaml
     spec:
       project: default
       sources:
@@ -22,10 +22,9 @@ spec:
           repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
           targetRevision: HEAD
           helm:
-            releaseName: '{{ path[2] }}'
+            releaseName: '{{ path[2] }}-cluster-users'
             valueFiles:
-            - $values/UserManagement/configurations/values.yaml
-            - $values/UserManagement/namespaces/{{path[2]}}/values.yaml
+            - $values/UserManagement/configurations/cluster-user-values.yaml
         - repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
           targetRevision: HEAD
           ref: values
