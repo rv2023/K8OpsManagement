@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: namespace-b
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: namespace-b
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: ''
+    repoURL: ''
+    targetRevision: HEAD
+  sources:
+    - path: UserManagement/configure-user
+      repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+          - $values/UserManagement/namespaces/namespace-b/values.yaml
+    - repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+      targetRevision: HEAD 
+      ref: values
+  project: default
