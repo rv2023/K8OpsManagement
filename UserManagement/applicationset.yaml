@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: main
+  name: usermanagement
   namespace: argocd
 spec:
   generators:
@@ -9,25 +9,31 @@ spec:
       elements:
         - appName: namespace-a
           namespace: namespace-a
+        - appName: namespace-b
+          namespace: namespace-b
   template:
     metadata:
       name: "{{appName}}"
       annotations:
         argocd.argoproj.io/manifest-generate-paths: ".;.."
     spec:
-      project: bootstrap
-      source:
-        repoURL: "https://github.com/rv2023/K8OpsManagement.git"
-        targetRevision: HEAD
-        path: "UserManagement/configure-user"
-        helm:
-          # Release name override (defaults to application name)
-          releaseName: "{{appName}}"
-          valueFiles:
-          - "UserManagement/namespaces/{{appName}}/values.yaml"
+      project: default
+      sources:
+        - path: UserManagement/configure-user
+          repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+          targetRevision: HEAD
+          helm:
+            releaseName: "{{appName}}"
+            valueFiles:
+            - $values/UserManagement/configure-user/values.yaml
+            - $values/UserManagement/namespaces/{{appName}}/values.yaml
+        - repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+          targetRevision: HEAD
+          ref: values
       destination:
         # Default base cluster
-        name: in-cluster
+        name:
+        server: 'https://kubernetes.default.svc'
         namespace: "{{namespace}}"
       syncPolicy:
         automated:

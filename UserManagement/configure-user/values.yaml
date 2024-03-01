@@ -3,6 +3,7 @@ orgauditors:
   - user2
   - user3
   - user4
+  - user5
 
 orgdevelopers:
   - user1
