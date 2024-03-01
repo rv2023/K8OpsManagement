@@ -24,7 +24,7 @@ spec:
           helm:
             releaseName: '{{ path[2] }}'
             valueFiles:
-            - $values/UserManagement/configurations/values.yaml
+            - $values/UserManagement/configurations/cluster-user-values.yaml
             - $values/UserManagement/namespaces/{{path[2]}}/values.yaml
         - repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
           targetRevision: HEAD
