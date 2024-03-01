@@ -13,18 +13,18 @@ spec:
        - path: UserManagement/namespaces/*/values.yaml
   template:
     metadata:
-      name: '{{ path[2] }}-users'
+      name: 'users-{{ path[2] }}'
       annotations:
         argocd.argoproj.io/manifest-generate-paths: ".;.."
     spec:
-      #  project: user-management
-      project: default
+      project: user-management
+      #project: default
       sources:
         - path: UserManagement/configurations
           repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
           targetRevision: HEAD
           helm:
-            releaseName: '{{ path[2] }}'
+            releaseName: 'users-{{ path[2] }}'
             valueFiles:
             - $values/UserManagement/configurations/cluster-user-values.yaml
             - $values/UserManagement/namespaces/{{path[2]}}/values.yaml
