@@ -5,27 +5,28 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - git:
-       repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
-       revision: HEAD
-       files:
-       - path: UserManagement/namespaces/*/values.yaml
+  - list:
+      elements:
+        - appName: namespace-a
+          namespace: namespace-a
+        - appName: namespace-b
+          namespace: namespace-b
   template:
     metadata:
-      name: '{{ path[2] }}'
+      name: "{{appName}}"
       annotations:
         argocd.argoproj.io/manifest-generate-paths: ".;.."
     spec:
       project: default
       sources:
-        - path: UserManagement/configurations
+        - path: UserManagement/configure-user
           repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
           targetRevision: HEAD
           helm:
-            releaseName: '{{ path[2] }}'
+            releaseName: "{{appName}}"
             valueFiles:
-            - $values/UserManagement/configurations/values.yaml
-            - $values/UserManagement/namespaces/{{path[2]}}/values.yaml
+            - $values/UserManagement/configure-user/values.yaml
+            - $values/UserManagement/namespaces/{{appName}}/values.yaml
         - repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
           targetRevision: HEAD
           ref: values
@@ -33,7 +34,7 @@ spec:
         # Default base cluster
         name:
         server: 'https://kubernetes.default.svc'
-        namespace: '{{ path[2] }}'
+        namespace: "{{namespace}}"
       syncPolicy:
         automated:
           prune: true
