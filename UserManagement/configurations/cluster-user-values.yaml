@@ -1,17 +1,17 @@
-orgauditors:
+clusterauditors:
   - user1
   - user2
   - user3
   - user4
   - user5
 
-orgdevelopers:
+clusterdevelopers:
   - user1
   - user2
   - user3
   - user4
 
-orgmanagers:
+clustermanagers:
   - user1
   - user2
   - user3
