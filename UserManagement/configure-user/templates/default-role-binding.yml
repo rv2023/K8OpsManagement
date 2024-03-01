@@ -2,20 +2,18 @@
 # and an empty file will abort the edit. If an error occurs while saving this file will be
 # reopened with the relevant failures.
 #
-{{- $namespace := .Values.namespace }}
+#{{- $namespace := .Values.namespace }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  #name: {{ $namespace }}-OrgAuditor-Role
-  name: OrgAuditor-Role
-  namespace: {{ $namespace }}
+  name: orgauditors-role
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: cluster-audit-role
 subjects:
-{{- range $i, $value := .Values.orgauditors }}
+{{- range .Values.orgauditors }}
 - apiGroup: rbac.authorization.k8s.io
   kind: User
-  name: {{ $value }}
+  name: {{ . }}
 {{- end }}
