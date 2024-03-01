@@ -4,5 +4,5 @@ resources:
 - namespace-d
 - namespace-c
 - StorageClasses
-#- ClusterRoles
+- ClusterRoles
 #- base

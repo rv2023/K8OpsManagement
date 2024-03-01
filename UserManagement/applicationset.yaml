@@ -9,6 +9,7 @@ spec:
        repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
        revision: HEAD
        files:
+#       - path: UserManagement/namespaces/namespace-c/values.yaml
        - path: UserManagement/namespaces/*/values.yaml
   template:
     metadata:
@@ -16,7 +17,8 @@ spec:
       annotations:
         argocd.argoproj.io/manifest-generate-paths: ".;.."
     spec:
-      project: user-management
+      #  project: user-management
+      project: default
       sources:
         - path: UserManagement/configurations
           repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
