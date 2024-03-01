@@ -3,5 +3,6 @@ resources:
 - namespace-b
 - namespace-d
 - namespace-c
+- StrogreClasses
   #- ClusterRoles
   #- base
