@@ -3,5 +3,5 @@ resources:
 - namespace-b
 - namespace-d
 - namespace-c
-  #- ClusterRoles
-  #- base
+- ClusterRoles
+- base
