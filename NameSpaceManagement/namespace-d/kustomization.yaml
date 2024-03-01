@@ -1,5 +1,5 @@
 resources:
 - namespace.yaml
 - ../base
-namespace: namespace-b
-namePrefix: namespace-b-
+namespace: namespace-d
+namePrefix: namespace-d-
