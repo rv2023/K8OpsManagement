@@ -1,5 +1,5 @@
 resources:
-- resourcequota.yml
-- default-limit-range.yml
+#- resourcequota.yml
+#- default-limit-range.yml
 - high-latency-storage-class.yml
 - default-storage-class.yml
