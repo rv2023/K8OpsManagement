@@ -1,2 +1,2 @@
 resources:
-- default-cluster-role.yml
+- default-cluster-role-auditor.yml
