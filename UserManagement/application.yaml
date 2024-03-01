@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: namespace-a
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/rv2023/K8OpsManagement.git"
+    targetRevision: HEAD
+    path: "UserManagement/configure-user"
+    helm:
+      releaseName: namespace-a
+      valueFiles:
+      - UserManagement/namespaces/namespace-a/values.yaml 
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: namespace-a
+

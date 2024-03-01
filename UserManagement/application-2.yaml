@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  creationTimestamp: "2024-03-01T03:09:25Z"
+  generation: 2
+  name: namespace-b
+  namespace: argocd
+  resourceVersion: "186406"
+  uid: 753d41b3-9528-47dc-87b3-28e41010ab3b
+spec:
+  destination:
+    namespace: namespace-b
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: UserManagement/configure-user
+    repoURL: https://github.com/rv2023/K8OpsManagement.git
+    targetRevision: HEAD
+status:
+  controllerNamespace: argocd
+  health:
+    status: Healthy
+  reconciledAt: "2024-03-01T03:09:25Z"
+  resources:
+  - group: rbac.authorization.k8s.io
+    health:
+      status: Missing
+    kind: RoleBinding
+    name: orgauditors-role
+    namespace: argocd
+    status: OutOfSync
+    version: v1
+  sourceType: Helm
+  summary: {}
+  sync:
+    comparedTo:
+      destination:
+        namespace: argocd
+        server: https://kubernetes.default.svc
+      source:
+        path: UserManagement/configure-user
+        repoURL: https://github.com/rv2023/K8OpsManagement.git
+        targetRevision: HEAD
+    revision: f652c7f3a08736b65e82126a89fbd6b7476f9bc9
+    status: OutOfSync
