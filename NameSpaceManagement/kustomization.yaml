@@ -1,4 +1,6 @@
 resources:
 - namespace-a
 - namespace-b
+- namespace-d
+- namespace-c
 - ClusterRoles
