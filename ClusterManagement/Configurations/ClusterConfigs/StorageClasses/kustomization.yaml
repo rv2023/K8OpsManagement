@@ -1,3 +1,0 @@
-resources:
-- high-latency-storage-class.yml
-- default-storage-class.yml

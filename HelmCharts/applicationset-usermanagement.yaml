@@ -10,7 +10,7 @@ spec:
        revision: HEAD
        files:
 #       - path: UserManagement/namespaces/namespace-c/values.yaml
-       - path: UserManagement/namespaces/*/values.yaml
+       - path: NameSpaces/*/Users/values.yaml
   template:
     metadata:
       name: 'users-{{ path[2] }}'
@@ -20,14 +20,14 @@ spec:
       project: user-management
       #project: default
       sources:
-        - path: UserManagement/configurations
+        - path: HelmCharts/UserManagement
           repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
           targetRevision: HEAD
           helm:
             releaseName: 'users-{{ path[2] }}'
             valueFiles:
             #- $values/UserManagement/configurations/values.yaml
-            - $values/UserManagement/namespaces/{{path[2]}}/values.yaml
+            - $values/NameSpaces/{{path[2]}}/Users/values.yaml
         - repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
           targetRevision: HEAD
           ref: values
