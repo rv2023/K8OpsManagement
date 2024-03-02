@@ -1,0 +1,18 @@
+{{- range .Values.storageClass }}
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ .name }}
+  annotations:
+    storageclass.kubernetes.io/is-default-class: {{ .default | default false }}
+provisioner: {{ .provisioner }}
+reclaimPolicy: {{ .reclaimPolicy }} # default value is Delete
+allowVolumeExpansion: {{ .allowVolumeExpansion }}
+mountOptions:
+    {{- range $.Values.mountOptions }}
+    - {{ . | title }}
+    {{- end }} 
+volumeBindingMode: {{ .volumeBindingMode }}
+parameters:
+  guaranteedReadWriteLatency: {{ .guaranteedReadWriteLatency }} # provider-specific
+{{- end }}

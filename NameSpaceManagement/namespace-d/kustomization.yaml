@@ -1,5 +1,0 @@
-resources:
-- namespace.yaml
-- ../base
-namespace: namespace-d
-namePrefix: namespace-d-
