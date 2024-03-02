@@ -10,12 +10,6 @@ spec:
        revision: HEAD
        files:
        - path: ClusterResources/ClusterAddons/*/values.yaml
-#  - list:
-#      elements:
-#        - appName: Valero
-#          namespace: Valero
-#        - appName: namespace-b
-#          namespace: namespace-b
   template:
     metadata:
       name: '{{ path[2] }}-addon'
@@ -29,13 +23,7 @@ spec:
           targetRevision: HEAD
           helm:
             releaseName: '{{ path[2] }}-addon'
-            #valueFiles:
-            #- $values/NameSpaces/{{path[1]}}/Resources/values.yaml
-        #- repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
-        #  targetRevision: HEAD
-        #  ref: values
       destination:
-        # Default base cluster
         name:
         server: 'https://kubernetes.default.svc'
         namespace: '{{ path[2] }}'
