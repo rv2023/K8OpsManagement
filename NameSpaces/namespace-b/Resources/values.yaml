@@ -1,0 +1,5 @@
+resourcequota:
+  requests.cpu: 5
+  requests.memory: 5Gi
+  limits.cpu: 5
+  limits.memory: 5Gi

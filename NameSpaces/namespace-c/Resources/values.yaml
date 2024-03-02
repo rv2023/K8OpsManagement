@@ -1,0 +1,3 @@
+limitRange:  
+  max.cpu: 6
+  max.mem: 6Gi

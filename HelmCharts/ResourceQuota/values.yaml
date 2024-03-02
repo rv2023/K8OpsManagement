@@ -1,0 +1,8 @@
+resourcequota:
+  requests.cpu: 1
+  requests.memory: 4Gi
+  limits.cpu: 2
+  limits.memory: 8Gi
+limitRange:  
+  max.cpu: 1
+  max.mem: 4Gi

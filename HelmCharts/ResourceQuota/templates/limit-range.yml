@@ -1,0 +1,12 @@
+{{- if .Values.limitRange }}
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: limit-range
+spec:
+  limits:
+  - max:
+      cpu: {{ .Values.limitRange.max.cpu }}
+      memory: {{ .Values.limitRange.max.mem }}
+    type: Pod
+{{- end }}

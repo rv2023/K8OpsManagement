@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: user-management
+  name: resource-management
   namespace: argocd
 spec:
   generators:
@@ -9,25 +9,22 @@ spec:
        repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
        revision: HEAD
        files:
-#       - path: UserManagement/namespaces/namespace-c/values.yaml
-       - path: NameSpaces/*/Users/values.yaml
+       - path: NameSpaces/*/Resources/values.yaml
   template:
     metadata:
-      name: 'users-{{ path[1] }}'
+      name: 'resource-{{ path[1] }}'
       annotations:
         argocd.argoproj.io/manifest-generate-paths: ".;.."
     spec:
-      project: user-management
-      #project: default
+      project: resource-management
       sources:
-        - path: HelmCharts/UserManagement
+        - path: HelmCharts/ResourceQuota
           repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
           targetRevision: HEAD
           helm:
-            releaseName: 'users-{{ path[1] }}'
+            releaseName: 'resource-{{ path[1] }}'
             valueFiles:
-            #- $values/UserManagement/configurations/values.yaml
-            - $values/NameSpaces/{{path[1]}}/Users/values.yaml
+            - $values/NameSpaces/{{path[1]}}/Resources/values.yaml
         - repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
           targetRevision: HEAD
           ref: values

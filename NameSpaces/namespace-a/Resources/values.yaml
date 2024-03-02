@@ -1,0 +1,8 @@
+resourcequota:
+  requests.cpu: 3
+  requests.memory: 3Gi
+  limits.cpu: 3
+  limits.memory: 3Gi
+limitRange:  
+  max.cpu: 3
+  max.mem: 3Gi
