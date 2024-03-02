@@ -4,7 +4,7 @@ kind: StorageClass
 metadata:
   name: {{ .name }}
   annotations:
-    storageclass.kubernetes.io/is-default-class: {{ .default | default false | quote }}
+    storageclass.kubernetes.io/is-default-class: {{ .default | default true | quote }}
 provisioner: {{ .provisioner }}
 reclaimPolicy: {{ .reclaimPolicy }} # default value is Delete
 allowVolumeExpansion: {{ .allowVolumeExpansion }}
