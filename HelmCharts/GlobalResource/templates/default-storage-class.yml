@@ -10,7 +10,7 @@ reclaimPolicy: {{ .reclaimPolicy }} # default value is Delete
 allowVolumeExpansion: {{ .allowVolumeExpansion }}
 mountOptions:
     {{- range $.Values.mountOptions }}
-    - {{ . | title }}
+    - {{ . }}
     {{- end }} 
 volumeBindingMode: {{ .volumeBindingMode }}
 parameters:

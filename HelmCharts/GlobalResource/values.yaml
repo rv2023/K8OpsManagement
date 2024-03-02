@@ -8,7 +8,7 @@ storageClass:
   volumeBindingMode: WaitForFirstConsumer
   guaranteedReadWriteLatency: true
   mountOptions:
-    - discard
+  - discard
 - name: high-latency
   provisioner: csi-driver.example-vendor.example
   reclaimPolicy: Retain
