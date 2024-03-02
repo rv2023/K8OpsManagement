@@ -7,11 +7,11 @@ storageClass:
     - discard
   volumeBindingMode: WaitForFirstConsumer
   guaranteedReadWriteLatency: "true"
-#- name: high-latency
-#  provisioner: csi-driver.example-vendor.example
-#  reclaimPolicy: Retain
-#  allowVolumeExpansion: false
-#  mountOptions:
-#    - discard
-#  volumeBindingMode: WaitForFirstConsumer
-#  guaranteedReadWriteLatency: "true"
+- name: high-latency
+  provisioner: csi-driver.example-vendor.example
+  reclaimPolicy: Retain
+  allowVolumeExpansion: false
+  mountOptions:
+    - discard
+  volumeBindingMode: WaitForFirstConsumer
+  guaranteedReadWriteLatency: "true"
