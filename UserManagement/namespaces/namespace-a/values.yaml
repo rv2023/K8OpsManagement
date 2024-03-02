@@ -5,6 +5,7 @@ orgauditors:
   - greg
   - madhu
   - vinay
+  - serviceaccount
 
 orgdevelopers:
   - sai
