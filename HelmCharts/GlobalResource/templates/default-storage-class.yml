@@ -9,7 +9,7 @@ provisioner: {{ .provisioner }}
 reclaimPolicy: {{ .reclaimPolicy }} # default value is Delete
 allowVolumeExpansion: {{ .allowVolumeExpansion }}
 mountOptions:
-    {{- range $.Values.mountOptions }}
+    {{- range .mountOptions }}
     - {{ . }}
     {{- end }} 
 volumeBindingMode: {{ .volumeBindingMode }}

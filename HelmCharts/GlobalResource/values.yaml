@@ -4,7 +4,7 @@ storageClass:
   reclaimPolicy: Retain
   allowVolumeExpansion: true
   mountOptions:
-  - discard
+    - discard
   volumeBindingMode: WaitForFirstConsumer
   guaranteedReadWriteLatency: true
 - name: high-latency
@@ -12,6 +12,6 @@ storageClass:
   reclaimPolicy: Retain
   allowVolumeExpansion: false
   mountOptions:
-  - discard
+    - discard
   volumeBindingMode: WaitForFirstConsumer
   guaranteedReadWriteLatency: true
