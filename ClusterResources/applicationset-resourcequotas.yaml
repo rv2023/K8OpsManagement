@@ -18,7 +18,7 @@ spec:
     spec:
       project: default
       sources:
-        - path: HelmCharts/ResourceQuota
+        - path: ClusterResources/ResourceQuota
           repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
           targetRevision: HEAD
           helm:
@@ -37,3 +37,6 @@ spec:
         automated:
           prune: true
           selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true

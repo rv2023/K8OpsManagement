@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: clusteraddonmanagement
+  namespace: argocd
+spec:
+  generators:
+  - git:
+       repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+       revision: HEAD
+       files:
+       - path: ClusterResources/ClusterAddons/*/values.yaml
+#  - list:
+#      elements:
+#        - appName: Valero
+#          namespace: Valero
+#        - appName: namespace-b
+#          namespace: namespace-b
+  template:
+    metadata:
+      name: '{{ path[2] }}-addon'
+      annotations:
+        argocd.argoproj.io/manifest-generate-paths: ".;.."
+    spec:
+      project: default
+      sources:
+        - path: ClusterResources/ClusterAddons/{{ path[2] }}
+          repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+          targetRevision: HEAD
+          helm:
+            releaseName: '{{ path[2] }}-addon'
+            #valueFiles:
+            #- $values/NameSpaces/{{path[1]}}/Resources/values.yaml
+        #- repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+        #  targetRevision: HEAD
+        #  ref: values
+      destination:
+        # Default base cluster
+        name:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{ path[2] }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

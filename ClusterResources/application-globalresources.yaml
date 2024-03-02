@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
-    path: HelmCharts/GlobalResource
+    path: ClusterResources/GlobalResource
     targetRevision: HEAD
   syncPolicy:
     automated:
