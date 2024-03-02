@@ -2,7 +2,7 @@ storageClass:
 - name: low-latency
   provisioner: csi-driver.example-vendor.example
   reclaimPolicy: Retain
-  allowVolumeExpansion: "true"
+  allowVolumeExpansion: true
   mountOptions:
     - discard
   volumeBindingMode: WaitForFirstConsumer
@@ -10,7 +10,7 @@ storageClass:
 - name: high-latency
   provisioner: csi-driver.example-vendor.example
   reclaimPolicy: Retain
-  allowVolumeExpansion: "false"
+  allowVolumeExpansion: false
   mountOptions:
     - discard
   volumeBindingMode: WaitForFirstConsumer
