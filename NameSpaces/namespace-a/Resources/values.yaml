@@ -1,8 +1,11 @@
-resourcequota:
-  requests.cpu: 3
-  requests.memory: 3Gi
-  limits.cpu: 3
-  limits.memory: 3Gi
+resourceQuota:
+  requests:
+    cpu: 5
+    memory: 5Gi
+  limits:
+    cpu: 5
+    memory: 5Gi
 limitRange:  
-  max.cpu: 3
-  max.mem: 3Gi
+  max:
+    cpu: 7
+    mem: 7Gi
