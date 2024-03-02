@@ -9,3 +9,19 @@ limitRange:
   max:
     cpu: 7
     mem: 7Gi
+pvclaim:
+  - pvcname: high-latency-pv-1
+    pvcstorage: 3Gi
+    storageClassName: high-latency
+    mountOptions:
+    - ReadWriteOnce
+  - pvcname: high-latency-pv-2
+    pvcstorage: 3Gi
+    storageClassName: high-latency
+    mountOptions:
+    - ReadWriteOnce
+  - pvcname: high-latency-pv-3
+    pvcstorage: 3Gi
+    storageClassName: high-latency
+    mountOptions:
+    - ReadWriteOnce
