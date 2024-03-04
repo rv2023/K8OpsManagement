@@ -1,12 +1,14 @@
 storageClass:
 - name: low-latency
+  default: true
   provisioner: csi-driver.example-vendor.example
   reclaimPolicy: Retain
   allowVolumeExpansion: true
   mountOptions:
     - discard
   volumeBindingMode: WaitForFirstConsumer
-  guaranteedReadWriteLatency: "true"
+  parameters:
+    guaranteedReadWriteLatency: "true"
 - name: high-latency
   provisioner: csi-driver.example-vendor.example
   reclaimPolicy: Retain
@@ -14,4 +16,3 @@ storageClass:
   mountOptions:
     - discard
   volumeBindingMode: WaitForFirstConsumer
-  guaranteedReadWriteLatency: "true"
