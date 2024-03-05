@@ -3,5 +3,5 @@ name: crossplan-system
 version: 1.16.0
 dependencies:
 - name: crossplane
-  version: 1.16.x
+  version: 1.16.0-rc.0.84.ga43cbf9a
   repository: https://charts.crossplane.io/master/
