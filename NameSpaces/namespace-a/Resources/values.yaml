@@ -13,15 +13,15 @@ pvclaim:
   - name: pvc-3g
     storage: 3Gi
     storageClassName: high-latency
-    mountOptions:
+    accessModes:
     - ReadWriteOnce
   - name: pvc-2g
     storage: 2Gi
     storageClassName: low-latency
-    mountOptions:
+    accessModes:
     - ReadWriteOnce
   - name: pvc-6g
     storage: 6Gi
     storageClassName: standard
-    mountOptions:
+    accessModes:
     - ReadWriteMany
