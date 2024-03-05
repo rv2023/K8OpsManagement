@@ -1,0 +1,7 @@
+apiVersion: v2
+name: crossplan-system
+version: 1.16.0
+dependencies:
+- name: crossplane
+  version: 1.16.x
+  repository: https://charts.crossplane.io/master/
