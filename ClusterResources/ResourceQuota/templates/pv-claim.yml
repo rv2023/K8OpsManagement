@@ -1,15 +1,14 @@
 {{- range .Values.pvclaim }}
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .pvcname }}
+  name: {{ .name }}
 spec:
-  storageClassName: {{ .storageclassname }}
+  storageClassName: {{ .storageClassName }}
   accessModes:
-    {{- range .mountOptions }}
-    - {{ . }}
-    {{- end }} 
+    {{ .accessModes | toYaml }}
   resources:
     requests:
-      storage: {{ .pvcstorage }}
+      storage: {{ .storage }}
 {{- end }} 
