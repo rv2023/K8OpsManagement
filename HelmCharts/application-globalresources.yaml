@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: globleresource-management-matrix
+  namespace: argocd
+spec:
+  generators:
+  - matrix:
+      generators:
+      - git:
+          repoURL: https://github.com/rv2023/K8OpsManagement.git
+          revision: HEAD
+          directories:
+          - path: ClusterResources/NameSpaces/*
+      - list:
+          elements:
+          - cluster: dev
+            url: https://kubernetes.default.svc
+          - cluster: sandbox
+            url: https://kubernetes.default.svc
+
+
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: globleresource-management
+  source:
+    repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+    path: ClusterResources/GlobalResource
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

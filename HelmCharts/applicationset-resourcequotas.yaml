@@ -11,7 +11,7 @@ spec:
           repoURL: https://github.com/rv2023/K8OpsManagement.git
           revision: HEAD
           directories:
-          - path: ClusterResources/NameSpaces/*
+          - path: Clusters/NameSpaces/*
       - list:
           elements:
           - cluster: dev
@@ -24,14 +24,14 @@ spec:
     spec:
       project: '{{ cluster }}'
       source:
-        path:  GlobalResources/ResourceQuota
+        path:  HelmCharts/ResourceQuota
         repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
         helm:
           releaseName: 'resource-{{ cluster }}-{{ path[2] }}-helm-release'
           valueFiles:
           #- 'values.yaml'
-          - '../../ClusterResources/ClusterDefaults/ResourceQuota/{{ cluster }}/values.yaml'
-          - '../../ClusterResources/NameSpaces/{{path[2]}}/Resources/values-{{ cluster }}.yaml'
+          - '../../Clusters/ClusterDefaults/ResourceQuota/{{ cluster }}/values.yaml'
+          - '../../Clusters/NameSpaces/{{path[2]}}/Resources/values-{{ cluster }}.yaml'
       destination:
         server: '{{ url }}'
         namespace: '{{ path[2] }}-{{ cluster }}'

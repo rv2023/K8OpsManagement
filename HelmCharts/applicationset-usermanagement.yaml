@@ -11,7 +11,7 @@ spec:
           repoURL: https://github.com/rv2023/K8OpsManagement.git
           revision: HEAD
           directories:
-          - path: ClusterResources/NameSpaces/*
+          - path: Clusters/NameSpaces/*
       - list:
           elements:
           - cluster: dev
@@ -24,13 +24,13 @@ spec:
     spec:
       project: '{{ cluster }}'
       source:
-        path:  GlobalResources/UserManagement
+        path:  HelmCharts/UserManagement
         repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
         helm:
           releaseName: 'users-{{ cluster }}-{{ path[2] }}-helm-release'
           valueFiles:
           - 'values.yaml'
-          - '../../ClusterResources/NameSpaces/{{path[2]}}/Users/values-{{ cluster }}.yaml'
+          - '../../Clusters/NameSpaces/{{path[2]}}/Users/values-{{ cluster }}.yaml'
       destination:
         server: '{{ url }}'
         namespace: '{{ path[2] }}'
