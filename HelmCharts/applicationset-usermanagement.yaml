@@ -31,6 +31,7 @@ spec:
           valueFiles:
           - 'values.yaml'
           - '../../Clusters/NameSpaces/{{path[2]}}/Users/values-{{ cluster }}.yaml'
+          #- '../../Clusters/ClusterConfigs/UserManagement/{{ cluster }}/values.yaml'
       destination:
         server: '{{ url }}'
         namespace: '{{ path[2] }}'

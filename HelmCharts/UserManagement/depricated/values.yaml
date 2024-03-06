@@ -1,0 +1,26 @@
+clusterauditors:
+  - user1
+  - user2
+  - user3
+  - user4
+  - user5
+  - user6
+  - user7
+
+clusterdevelopers:
+  - user1
+  - user2
+  - user3
+  - user4
+
+clustermanagers:
+  - user1
+  - user2
+  - user3
+  - user4
+
+orgauditors: []
+
+orgdevelopers: []
+
+orgmanagers: []
