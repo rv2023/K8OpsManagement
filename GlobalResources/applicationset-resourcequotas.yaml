@@ -29,7 +29,8 @@ spec:
         helm:
           releaseName: 'resource-{{ cluster }}-{{ path[2] }}-helm-release'
           valueFiles:
-          - 'values.yaml'
+          #- 'values.yaml'
+          - '../../ClusterResources/ClusterDefaults/ResourceQuota/{{ cluster }}/{{ path[2] }}/values.yaml'
           - '../../ClusterResources/NameSpaces/{{path[2]}}/Resources/values-{{ cluster }}.yaml'
       destination:
         server: '{{ url }}'
