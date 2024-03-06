@@ -1,66 +1,66 @@
-{{- if eq .Values.env "prod" }}
-{{- if .Values.orgauditors }}
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: org-auditors-role-binding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-audit-role
-subjects:
-{{- range .Values.orgauditors }}
-- apiGroup: rbac.authorization.k8s.io
-  kind: User
-  name: {{ . }}
-{{- end }}
-{{- end }}
-{{- if eq .Values.env "dev" }}
-{{- if .Values.orgauditors }}
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: org-auditors-role-binding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-audit-role
-subjects:
-{{- range .Values.orgauditors }}
-- apiGroup: rbac.authorization.k8s.io
-  kind: User
-  name: {{ . }}
-{{- end }}
-{{- end }}
-{{- if .Values.orgmanager }}
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: org-managers-role-binding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-audit-role
-subjects:
-{{- range .Values.orgmanager }}
-- apiGroup: rbac.authorization.k8s.io
-  kind: User
-  name: {{ . }}
-{{- end }}
-{{- end }}
-{{- if .Values.orgmanager }}
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: org-managers-role-binding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-audit-role
-subjects:
-{{- range .Values.orgmanager }}
-- apiGroup: rbac.authorization.k8s.io
-  kind: User
-  name: {{ . }}
-{{- end }}
-{{- end }}
+# {{- if eq .Values.env "prod" }}
+# {{- if .Values.orgauditors }}
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: RoleBinding
+# metadata:
+#   name: org-auditors-role-binding
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: cluster-audit-role
+# subjects:
+# {{- range .Values.orgauditors }}
+# - apiGroup: rbac.authorization.k8s.io
+#   kind: User
+#   name: {{ . }}
+# {{- end }}
+# {{- end }}
+# {{- if eq .Values.env "dev" }}
+# {{- if .Values.orgauditors }}
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: RoleBinding
+# metadata:
+#   name: org-auditors-role-binding
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: cluster-audit-role
+# subjects:
+# {{- range .Values.orgauditors }}
+# - apiGroup: rbac.authorization.k8s.io
+#   kind: User
+#   name: {{ . }}
+# {{- end }}
+# {{- end }}
+# {{- if .Values.orgmanager }}
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: RoleBinding
+# metadata:
+#   name: org-managers-role-binding
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: cluster-audit-role
+# subjects:
+# {{- range .Values.orgmanager }}
+# - apiGroup: rbac.authorization.k8s.io
+#   kind: User
+#   name: {{ . }}
+# {{- end }}
+# {{- end }}
+# {{- if .Values.orgmanager }}
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: RoleBinding
+# metadata:
+#   name: org-managers-role-binding
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: cluster-audit-role
+# subjects:
+# {{- range .Values.orgmanager }}
+# - apiGroup: rbac.authorization.k8s.io
+#   kind: User
+#   name: {{ . }}
+# {{- end }}
+# {{- end }}
