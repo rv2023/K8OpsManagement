@@ -1,0 +1,27 @@
+resourceQuota:
+  requests:
+    cpu: 5
+    memory: 5Gi
+  limits:
+    cpu: 5
+    memory: 5Gi
+limitRange:  
+  max:
+    cpu: 7
+    mem: 7Gi
+pvclaim:
+  - name: pvc-3g
+    storage: 3Gi
+    storageClassName: high-latency
+    accessModes:
+    - ReadWriteOnce
+  - name: pvc-2g
+    storage: 2Gi
+    storageClassName: low-latency
+    accessModes:
+    - ReadWriteOnce
+  - name: pvc-6g
+    storage: 6Gi
+    storageClassName: standard
+    accessModes:
+    - ReadWriteMany

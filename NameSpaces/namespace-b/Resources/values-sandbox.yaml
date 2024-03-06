@@ -1,0 +1,7 @@
+resourceQuota:
+  requests:
+    cpu: 8
+    memory: 8Gi
+  limits:
+    cpu: 8
+    memory: 8Gi
