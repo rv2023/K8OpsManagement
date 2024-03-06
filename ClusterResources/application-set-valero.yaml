@@ -1,0 +1,51 @@
+# App templates can also be defined as part of the generator's template stanza. Sometimes it is
+# useful to do this in order to override the spec.template stanza, and when simple string
+# parameterization are insufficient. In the below examples, the generators[].XXX.template is 
+# a partial definition, which overrides/patch the default template.
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: velero
+spec:
+  generators:
+  - list:
+      elements:
+        - cluster: testing
+          url: https://kubernetes.default.svc
+          chartVersion: 4.1.3
+          namespace: testing
+        - cluster: nonprod
+          url: https://kubernetes.default.svc
+          chartVersion: 4.1.5
+          namespace: nonprod
+        - cluster: prod
+          url: https://kubernetes.default.svc
+          chartVersion: 5.0.0
+          namespace: prod
+  template:
+    metadata:
+      name: '{{cluster}}-velero'
+    spec:
+      project: "default"
+      sources:
+        - path: velero
+          repoURL: 'https://vmware-tanzu.github.io/helm-charts/'
+          targetRevision: '{{chartVersion}}'
+          helm:
+            releaseName: velero
+            valueFiles:
+            - '$values/Addons/velero/{{cluster}}/values.yaml'
+        - repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+          targetRevision: HEAD
+          ref: values
+      destination:
+        name:
+        server: '{{url}}'
+        namespace: '{{namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true

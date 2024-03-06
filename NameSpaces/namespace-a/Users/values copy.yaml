@@ -1,4 +1,11 @@
-orgauditors: []
+orgauditors:
+  - sai
+  - ram
+  - uday
+  - greg
+  - madhu
+  - vinay
+  - serviceaccount
 
 orgdevelopers:
   - sai

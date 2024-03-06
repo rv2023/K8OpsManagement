@@ -16,7 +16,7 @@ spec:
       annotations:
         argocd.argoproj.io/manifest-generate-paths: ".;.."
     spec:
-      project: default
+      project: resource-management
       sources:
         - path: ClusterResources/ResourceQuota
           repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
