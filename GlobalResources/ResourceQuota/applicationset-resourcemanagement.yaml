@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: list-git
+  namespace: argocd
 spec:
   generators:
   - matrix:
@@ -13,23 +14,25 @@ spec:
           - path: applicationset/examples/matrix/cluster-addons/*
       - list:
           elements:
-          - cluster: engineering-dev
+          - cluster: dev
             url: https://1.2.3.4
             values:
               project: dev
-          - cluster: engineering-prod
+          - cluster: prod
             url: https://2.4.6.8
             values:
               project: prod
   template:
     metadata:
-      name: '{{.path.basename}}-{{.cluster}}'
+      name: '{{ path[4] }}-{{ cluster }}'
     spec:
-      project: '{{.values.project}}'
+      project: '{{ cluster }}'
       source:
         repoURL: https://github.com/argoproj/argo-cd.git
         targetRevision: HEAD
-        path: '{{.path.path}}'
+        path: '{{ .path.path }}'
       destination:
-        server: '{{.url}}'
-        namespace: '{{.path.basename}}'
+        server: '{{ .url }}'
+        namespace: '{{ .path.basename }}'
+
+        
