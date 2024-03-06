@@ -32,16 +32,16 @@ spec:
           repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
           targetRevision: HEAD
           helm:
-            releaseName: 'resource-{{cluster}}-{{ path[1] }}'
+            releaseName: '{{cluster}}-{{ path[2] }}-resource'
             valueFiles:
-            - '$values/ClusterResource/NameSpaces/{{path[1]}}/Resources/values-{{cluster}}.yaml'
+            - '$values/ClusterResource/NameSpaces/{{path[2]}}/Resources/values-{{cluster}}.yaml'
         - repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
           targetRevision: HEAD
           ref: values
       destination:
         name:
         server: '{{url}}'
-        namespace: '{{namespace}}'
+        namespace: '{{cluster}}-{{path[2]}}'
       syncPolicy:
         automated:
           prune: true
