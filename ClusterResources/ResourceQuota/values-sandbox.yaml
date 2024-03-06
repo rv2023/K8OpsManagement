@@ -1,0 +1,27 @@
+resourceQuota:
+  requests:
+    cpu: 1
+    memory: 4Gi
+  limits:
+    cpu: 2
+    memory: 8Gi
+limitRange:
+  max:
+    cpu: 1
+    mem: 4Gi
+pvclaim: []
+  # - name: high-latency-pv-1
+  #   storage: 3Gi
+  #   storageClassName: high-latency
+  #   accessModes:
+  #   - ReadWriteOnce
+  # - name: high-latency-pv-2
+  #   storage: 3Gi
+  #   storageClassName: high-latency
+  #   accessModes:
+  #   - ReadWriteOnce
+  # - name: high-latency-pv-3
+  #   storage: 3Gi
+  #   storageClassName: high-latency
+  #   accessModes:
+  #   - ReadWriteOnce
