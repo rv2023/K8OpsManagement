@@ -30,7 +30,7 @@ spec:
           releaseName: 'resource-{{ cluster }}-{{ path[2] }}-helm-release'
           valueFiles:
           #- 'values.yaml'
-          - '../../Clusters/ClusterDefaults/ResourceQuota/{{ cluster }}/values.yaml'
+          - '../../Clusters/ClusterConfigs/ResourceQuota/{{ cluster }}/values.yaml'
           - '../../Clusters/NameSpaces/{{path[2]}}/Resources/values-{{ cluster }}.yaml'
       destination:
         server: '{{ url }}'
