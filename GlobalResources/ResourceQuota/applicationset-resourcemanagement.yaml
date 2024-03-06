@@ -1,51 +1,35 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: resource-management
-  namespace: argocd
+  name: list-git
 spec:
-    - matrix:
-        generators:
-          # git generator, 'child' #1
-          - git:
-              repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
-              revision: HEAD
-              directories:
-              - path: ClusterResource/NameSpace/*
-          # cluster generator, 'child' #2
-          - list:
-              elements:
-                - cluster: sandbox
-                  url: https://kubernetes.default.svc
-                - cluster: nonprod
-                  url: https://kubernetes.default.svc
-                - cluster: prod
-                  url: https://kubernetes.default.svc
+  generators:
+  - matrix:
+      generators:
+      - git:
+          repoURL: https://github.com/argoproj/argo-cd.git
+          revision: HEAD
+          directories:
+          - path: applicationset/examples/matrix/cluster-addons/*
+      - list:
+          elements:
+          - cluster: engineering-dev
+            url: https://1.2.3.4
+            values:
+              project: dev
+          - cluster: engineering-prod
+            url: https://2.4.6.8
+            values:
+              project: prod
   template:
     metadata:
-      name: '{{cluster}}-resource-management'        
-      argocd.argoproj.io/manifest-generate-paths: ".;.."
+      name: '{{.path.basename}}-{{.cluster}}'
     spec:
-      project: '{{cluster}}-resource-management'
-      sources:
-        - path: GlobalResource/ResourceQuota
-          repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
-          targetRevision: HEAD
-          helm:
-            releaseName: '{{cluster}}-{{ path[2] }}-resource'
-            valueFiles:
-            - '$values/ClusterResource/NameSpaces/{{path[2]}}/Resources/values-{{cluster}}.yaml'
-        - repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
-          targetRevision: HEAD
-          ref: values
+      project: '{{.values.project}}'
+      source:
+        repoURL: https://github.com/argoproj/argo-cd.git
+        targetRevision: HEAD
+        path: '{{.path.path}}'
       destination:
-        name:
-        server: '{{url}}'
-        namespace: '{{cluster}}-{{path[2]}}'
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        syncOptions:
-          - CreateNamespace=true
-          - ApplyOutOfSyncOnly=true
+        server: '{{.url}}'
+        namespace: '{{.path.basename}}'

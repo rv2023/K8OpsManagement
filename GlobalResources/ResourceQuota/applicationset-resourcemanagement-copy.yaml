@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: resource-management
+  namespace: argocd
+spec:
+  #goTemplate: true
+  #goTemplateOptions: ["missingkey=error"]
+  generators:
+    - matrix:
+        generators:
+        - git:
+             repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+             revision: HEAD
+             directories:
+             - path: ClusterResource/NameSpace/*
+        - list:
+            elements:
+              - cluster: sandbox
+                url: https://kubernetes.default.svc
+                values:
+                  project: sandbox
+              - cluster: nonprod
+                url: https://kubernetes.default.svc
+                values:
+                  project: nonprod
+              - cluster: prod
+                url: https://kubernetes.default.svc
+                values:
+                  project: prod
+  template:
+    metadata:
+      name: '{{.path.basename}}-{{.cluster}}'
+      #argocd.argoproj.io/manifest-generate-paths: ".;.."
+    spec:
+      project: '{{.values.project}}'
+      sources:
+        - path: GlobalResource/ResourceQuota
+          repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+          targetRevision: HEAD
+          helm:
+            releaseName: '{{cluster}}-{{.path.basename}}-resource'
+            valueFiles:
+            - '$values/ClusterResource/NameSpaces/{{.path.basename}}/Resources/values-{{cluster}}.yaml'
+        - repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+          targetRevision: HEAD
+          ref: values
+      destination:
+        name:
+        server: '{{url}}'
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
