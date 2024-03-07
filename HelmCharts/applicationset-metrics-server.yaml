@@ -22,7 +22,7 @@ spec:
     spec:
       project: '{{ cluster }}'
       sources:
-        - path:  metrics-server/metrics-server
+        - #path:  metrics-server/metrics-server
           repoURL: 'https://kubernetes-sigs.github.io/metrics-server/'
           targetRevision: '{{chartVersion}}'
           helm:
