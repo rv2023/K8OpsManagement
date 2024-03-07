@@ -18,7 +18,7 @@ spec:
           chartVersion: 5.0.0
   template:
     metadata:
-      name: '{{cluster}}-metrics-server-application'
+      name: 'metrics-server-{{ cluster }}-application'
     spec:
       project: '{{ cluster }}'
       sources:
@@ -26,13 +26,13 @@ spec:
           repoURL: 'https://kubernetes-sigs.github.io/metrics-server/'
           targetRevision: '{{chartVersion}}'
           helm:
-            releaseName: '{{cluster}}-metrics-server-application'
+            releaseName: 'metrics-server-{{ cluster }}-helm-release'
             valueFiles:
              - '../../Clusters/ClusterConfigs/ClusterAddons/metrics-sever/{{ cluster }}/values.yaml'
       destination:
         name:
         server: '{{url}}'
-        namespace: '{{ cluster }}-metrics-server'
+        namespace: 'metrics-server-{{ cluster }}'
       syncPolicy:
         automated:
           prune: true

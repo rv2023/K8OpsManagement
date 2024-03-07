@@ -18,7 +18,7 @@ spec:
           chartVersion: 5.0.0
   template:
     metadata:
-      name: '{{cluster}}-velero-application'
+      name: 'velero-{{ cluster }}-application'
     spec:
       project: '{{ cluster }}'
       sources:
@@ -26,13 +26,13 @@ spec:
           repoURL: 'https://kubernetes-sigs.github.io/metrics-server/'
           targetRevision: '{{chartVersion}}'
           helm:
-            releaseName: '{{cluster}}-velero-application'
+            releaseName: 'velero-{{ cluster }}-helm-release'
             valueFiles:
              - '../../Clusters/ClusterConfigs/ClusterAddons/velero/{{ cluster }}/values.yaml'
       destination:
         name:
         server: '{{url}}'
-        namespace: '{{ cluster }}-velero'
+        namespace: 'velero-{{ cluster }}'
       syncPolicy:
         automated:
           prune: true
