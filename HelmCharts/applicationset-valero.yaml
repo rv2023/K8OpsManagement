@@ -28,7 +28,7 @@ spec:
           helm:
             releaseName: 'velero-{{ cluster }}-helm-release'
             valueFiles:
-             - '../../Clusters/ClusterConfigs/ClusterAddons/velero/{{ cluster }}/values.yaml'
+             - 'Clusters/ClusterConfigs/ClusterAddons/velero/{{ cluster }}/values.yaml'
       destination:
         name:
         server: '{{url}}'

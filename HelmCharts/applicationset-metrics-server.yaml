@@ -28,7 +28,7 @@ spec:
           helm:
             releaseName: 'metrics-server-{{ cluster }}-helm-release'
             valueFiles:
-             - '../../Clusters/ClusterConfigs/ClusterAddons/metrics-sever/{{ cluster }}/values.yaml'
+             - 'Clusters/ClusterConfigs/ClusterAddons/metrics-sever/{{ cluster }}/values.yaml'
       destination:
         name:
         server: '{{url}}'
