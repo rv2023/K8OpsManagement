@@ -28,6 +28,8 @@ spec:
         repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
         helm:
           releaseName: 'users-{{ cluster }}-{{ path[2] }}-helm-release'
+          values:
+            env: '{{cluster}}'
           valueFiles:
           - 'values.yaml'
           - '../../Clusters/NameSpaces/{{path[2]}}/Users/values-{{ cluster }}.yaml'

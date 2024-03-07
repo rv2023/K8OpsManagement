@@ -23,4 +23,6 @@ orgauditors: []
 
 orgdevelopers: []
 
-orgmanagers: []
+orgmanagers:
+  - test1
+  - test2
