@@ -20,7 +20,7 @@ spec:
     metadata:
       name: '{{cluster}}-velero-application'
     spec:
-      project: "default"
+      project: '{{ cluster }}'
       sources:
         - path:  velero
           repoURL: 'https://kubernetes-sigs.github.io/metrics-server/'
