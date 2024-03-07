@@ -28,7 +28,7 @@ spec:
         repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
         helm:
           releaseName: 'users-{{ cluster }}-{{ path[2] }}-helm-release'
-          values:
+          valuesObject:
             env: '{{cluster}}'
           valueFiles:
           - 'values.yaml'
@@ -36,7 +36,7 @@ spec:
           #- '../../Clusters/ClusterConfigs/UserManagement/{{ cluster }}/values.yaml'
       destination:
         server: '{{ url }}'
-        namespace: '{{ path[2] }}'
+        namespace: '{{ path[2] }}-{{ cluster }}'
       syncPolicy:
         automated:
           prune: true
