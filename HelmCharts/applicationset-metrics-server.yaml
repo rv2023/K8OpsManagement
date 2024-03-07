@@ -22,21 +22,25 @@ spec:
     spec:
       project: '{{ cluster }}'
       sources:
-        - #path:  metrics-server/metrics-server
+      sources:
+        - path:  metrics-server/metrics-server
           repoURL: 'https://kubernetes-sigs.github.io/metrics-server/'
           targetRevision: '{{chartVersion}}'
           helm:
-            releaseName: 'metrics-server-{{ cluster }}-helm-release'
+            releaseName: '{{cluster}}-metrics-server'
             valueFiles:
-             - 'Clusters/ClusterConfigs/ClusterAddons/metrics-sever/{{ cluster }}/values.yaml'
+            - '$values/Clusters/ClusterConfigs/ClusterAddons/metrics-sever/{{ cluster }}/values.yaml'
+        - repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+          targetRevision: HEAD
+          ref: values
+#- '$values/Clusters/ClusterConfigs/ClusterAddons/metrics-sever/{{ cluster }}/values.yaml'
       destination:
-        name:
         server: '{{url}}'
         namespace: 'metrics-server-{{ cluster }}'
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        syncOptions:
-          - CreateNamespace=true
-          - ApplyOutOfSyncOnly=true
+#      syncPolicy:
+#        automated:
+#          prune: true
+#          selfHeal: true
+#        syncOptions:
+#          - CreateNamespace=true
+#          - ApplyOutOfSyncOnly=true
