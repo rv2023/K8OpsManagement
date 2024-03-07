@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: velero-application-set
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+        - cluster: sandbox
+          url: https://kubernetes.default.svc
+          chartVersion: 4.1.3
+        - cluster: dev
+          url: https://kubernetes.default.svc
+          chartVersion: 4.1.5
+        - cluster: prod
+          url: https://kubernetes.default.svc
+          chartVersion: 5.0.0
+  template:
+    metadata:
+      name: '{{cluster}}-velero-application'
+    spec:
+      project: "default"
+      sources:
+        - path:  velero
+          repoURL: 'https://kubernetes-sigs.github.io/metrics-server/'
+          targetRevision: '{{chartVersion}}'
+          helm:
+            releaseName: '{{cluster}}-velero-application'
+            valueFiles:
+             - '../../Clusters/ClusterConfigs/ClusterAddons/velero/{{ cluster }}/values.yaml'
+      destination:
+        name:
+        server: '{{url}}'
+        namespace: '{{ cluster }}-velero'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
