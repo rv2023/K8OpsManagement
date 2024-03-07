@@ -30,6 +30,9 @@ spec:
           releaseName: 'users-{{ cluster }}-{{ path[2] }}-helm-release'
           valuesObject:
             env: '{{cluster}}'
+            allowedNamespaces:
+            - dev
+            - sandbox
           valueFiles:
           - 'values.yaml'
           - '../../Clusters/NameSpaces/{{path[2]}}/Users/values-{{ cluster }}.yaml'

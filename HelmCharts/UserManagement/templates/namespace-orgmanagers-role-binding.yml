@@ -1,4 +1,4 @@
-{{- if and .Values.orgmanagers (eq .Values.env "dev") }}
+{{- if and .Values.orgmanagers (has .Values.env .Values.allowedNamespaces) }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
