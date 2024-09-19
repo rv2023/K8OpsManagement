@@ -1,38 +1,38 @@
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
-  name: cluster-resource-management-application-set
-  namespace: argocd
-spec:
-  generators:
-  - list:
-      elements:
-        - cluster: sandbox
-          url: https://kubernetes.default.svc
-        - cluster: dev
-          url: https://kubernetes.default.svc
-        - cluster: prod
-          url: https://kubernetes.default.svc
-  template:
-    metadata:
-      name: cluster-resource-management-{{ cluster }}-application
-    spec:
-      project: '{{ cluster }}'
-      source:
-        path:  HelmCharts/ClusterResources
-        repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
-        helm:
-          releaseName: 'cluster-resource-{{ cluster }}-helm-release'
-          valueFiles:
-          #- 'values.yaml'
-          - '../../Clusters/ClusterConfigs/ClusterResources/{{ cluster }}/values.yaml'
-      destination:
-        server: '{{ url }}'
-        namespace: 'default'
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        syncOptions:
-          - CreateNamespace=true
-          - ApplyOutOfSyncOnly=true
+# apiVersion: argoproj.io/v1alpha1
+# kind: ApplicationSet
+# metadata:
+#   name: cluster-resource-management-application-set
+#   namespace: argocd
+# spec:
+#   generators:
+#   - list:
+#       elements:
+#         - cluster: sandbox
+#           url: https://kubernetes.default.svc
+#         - cluster: dev
+#           url: https://kubernetes.default.svc
+#         - cluster: prod
+#           url: https://kubernetes.default.svc
+#   template:
+#     metadata:
+#       name: cluster-resource-management-{{ cluster }}-application
+#     spec:
+#       project: '{{ cluster }}'
+#       source:
+#         path:  HelmCharts/ClusterResources
+#         repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+#         helm:
+#           releaseName: 'cluster-resource-{{ cluster }}-helm-release'
+#           valueFiles:
+#           #- 'values.yaml'
+#           - '../../Clusters/ClusterConfigs/ClusterResources/{{ cluster }}/values.yaml'
+#       destination:
+#         server: '{{ url }}'
+#         namespace: 'default'
+#       syncPolicy:
+#         automated:
+#           prune: true
+#           selfHeal: true
+#         syncOptions:
+#           - CreateNamespace=true
+#           - ApplyOutOfSyncOnly=true
