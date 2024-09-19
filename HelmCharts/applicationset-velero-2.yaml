@@ -15,7 +15,7 @@ spec:
     spec:
       project: multi-cluster-project
       source:
-      - path:  velero
+        path:  velero
         repoURL: 'https://vmware-tanzu.github.io/helm-charts/'
         targetRevision: '4.1.3'
         helm:
