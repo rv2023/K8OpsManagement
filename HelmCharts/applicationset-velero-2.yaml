@@ -5,10 +5,10 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - clusterSecrets:
-        selector:
-          matchLabels:
-            addons/velero: "true"
+    - clusters:
+      selector:
+        matchLabels:
+          addons/velero: "true"
   template:
     metadata:
       name: 'velero-application'
