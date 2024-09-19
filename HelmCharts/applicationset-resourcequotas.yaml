@@ -1,44 +1,44 @@
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
-  name: resource-management-matrix
-  namespace: argocd
-spec:
-  generators:
-  - matrix:
-      generators:
-      - git:
-          repoURL: https://github.com/rv2023/K8OpsManagement.git
-          revision: HEAD
-          directories:
-          - path: Clusters/NameSpaces/*
-      - list:
-          elements:
-          - cluster: dev
-            url: https://kubernetes.default.svc
-          - cluster: sandbox
-            url: https://kubernetes.default.svc
-  template:
-    metadata:
-      name: resource-management-{{ cluster }}-{{ path[2] }}-application
-    spec:
-      project: '{{ cluster }}'
-      source:
-        path:  HelmCharts/ResourceQuota
-        repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
-        helm:
-          releaseName: 'resource-{{ cluster }}-{{ path[2] }}-helm-release'
-          valueFiles:
-          #- 'values.yaml'
-          - '../../Clusters/ClusterConfigs/ResourceQuota/{{ cluster }}/values.yaml'
-          - '../../Clusters/NameSpaces/{{path[2]}}/Resources/values-{{ cluster }}.yaml'
-      destination:
-        server: '{{ url }}'
-        namespace: '{{ path[2] }}-{{ cluster }}'
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        syncOptions:
-          - CreateNamespace=true
-          - ApplyOutOfSyncOnly=true
+# apiVersion: argoproj.io/v1alpha1
+# kind: ApplicationSet
+# metadata:
+#   name: resource-management-matrix
+#   namespace: argocd
+# spec:
+#   generators:
+#   - matrix:
+#       generators:
+#       - git:
+#           repoURL: https://github.com/rv2023/K8OpsManagement.git
+#           revision: HEAD
+#           directories:
+#           - path: Clusters/NameSpaces/*
+#       - list:
+#           elements:
+#           - cluster: dev
+#             url: https://kubernetes.default.svc
+#           - cluster: sandbox
+#             url: https://kubernetes.default.svc
+#   template:
+#     metadata:
+#       name: resource-management-{{ cluster }}-{{ path[2] }}-application
+#     spec:
+#       project: '{{ cluster }}'
+#       source:
+#         path:  HelmCharts/ResourceQuota
+#         repoURL: 'https://github.com/rv2023/K8OpsManagement.git'
+#         helm:
+#           releaseName: 'resource-{{ cluster }}-{{ path[2] }}-helm-release'
+#           valueFiles:
+#           #- 'values.yaml'
+#           - '../../Clusters/ClusterConfigs/ResourceQuota/{{ cluster }}/values.yaml'
+#           - '../../Clusters/NameSpaces/{{path[2]}}/Resources/values-{{ cluster }}.yaml'
+#       destination:
+#         server: '{{ url }}'
+#         namespace: '{{ path[2] }}-{{ cluster }}'
+#       syncPolicy:
+#         automated:
+#           prune: true
+#           selfHeal: true
+#         syncOptions:
+#           - CreateNamespace=true
+#           - ApplyOutOfSyncOnly=true
