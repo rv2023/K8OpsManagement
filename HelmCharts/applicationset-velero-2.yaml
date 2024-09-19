@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: velero-application-set
+  namespace: argocd
+spec:
+  generators:
+    - clusterSecrets:
+        selector:
+          matchLabels:
+            addons/velero: "true"
+  template:
+    metadata:
+      name: 'velero-application'
+    spec:
+      project: multi-cluster-project
+      sources:
+        - path:  velero
+          repoURL: 'https://kubernetes-sigs.github.io/metrics-server/'
+          targetRevision: '4.1.3'
+          helm:
+            releaseName: 'velero-helm-release'
+            valueFiles:
+             - 'Clusters/ClusterConfigs/ClusterAddons/velero/dev/values.yaml'
+      destination:
+        server: '{{server}}'
+        namespace: velero
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
